@@ -1,0 +1,20 @@
+{
+	"mydigitalstructure":
+	{
+		"hostname": "api.mydigitalstructure.cloud",
+		"logon": "x", 
+		"password": "x", 
+		"email": "x",
+		"testing": 
+		{
+			"status": "true",
+			"showData": "true",
+			"break": "-"
+		},
+		"convert": "true"
+	},
+	"local":
+	{
+		"port": "3000"
+	}
+}	
