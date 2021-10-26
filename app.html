@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>
+<meta name='myds_document_id' Content='163167'>
+<title>app</title>
+<meta name='description' content=''>
+<meta name='keywords' content=''>
+<!--
+  
+  [Learn Comment /scripts #1]
+
+	The following HTML is included in the head section of the webapp, covering:
+
+	# The setting of the options for the character set to be used 
+	# A viewport setting so the webapp will work on small screens.
+	# Associated CSS files for different frameworks included in the layout
+	# A short cut icon, which shows up in the webbrowser - eg on the icon on the tab
+
+-->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="/site/1901/bootstrap.min.css" rel="stylesheet">
+<link href="/site/1901/fontawesome-5.15.2.css" rel="stylesheet">
+<link href="/site/1901/animate.css" rel="stylesheet">
+<link href="/site/1901/toastr.min.css" rel="stylesheet">
+<link href="/site/1901/jquery.gritter.css" rel="stylesheet">
+<link href="/site/1901/c3.min.css" rel="stylesheet">
+<link href="/site/1901/bootstrap-chosen.css" rel="stylesheet">
+<link href="/site/1901/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+<link href="/site/1901/1901.style.inspinia-1.0.0.css" rel="stylesheet">
+<link href="/site/1901/select2.css" rel="stylesheet">
+<link href="/site/1901/mydigitalstructure.util-3.0.2.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="/site/1901/favicon.png">
+</head>
+
+<body>
+<!--
+    [Learn Comment /layout #1]
+
+    This HTML is the base template for the webapp and is shown on every page
+    once the user is authenticated - it is a key part of the form of the app.
+
+    It includes HTML for:
+
+    # The top navigation (header)
+    # The footer
+    # The mydigitalstructure:content tag is a placeholder for the HTML of the page being shown ie /app
+    # The file references to the webapp code ie the JavaScript that makes the webapp function;
+        - including 3rd party frameworks
+        - the webapp code, created by you or your team
+
+-->
+
+<div id="myds-toast" class="position-absolute w-100 d-flex flex-column p-4" aria-live="assertive" aria-atomic="true"></div>
+
+<div id="wrapper">
+  
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <img class="nav-label" src="/site/1901/1901.logo-1.0.0.png" style="width:94%; margin-top:16px;">
+      <ul class="nav metismenu myds-menu" id="side-menu">
+        <li class="nav-header">
+          <div class="dropdown profile-element">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="clear"> <span class="block mt-1"> <strong class="font-bold"><span class="myds-logon-space"></span></strong>
+            </span> <span class="text-muted text-xs block"><span class="myds-logon-first-name"></span> <span class="myds-logon-surname"></span> <b class="caret"></b></span></span></a>
+            <ul class="dropdown-menu animated fadeInRight mt-1">
+              <li><a href="#" class="myds-logoff">Log off</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="active">
+          <a href="/app/#dashboard"><i class="fa fa-tachometer-alt fa-fw"></i> <span class="nav-label">Dashboard</span></a>     
+        </li>
+        <li>
+          <a href="/app/#contact-dashboard"><i class="fa fa-address-card fa-fw"></i> <span class="nav-label">Contacts</span> </a>
+        </li>
+        <li>
+          <a href="/app/#action-dashboard"><i class="fa fa-calendar fa-fw"></i> <span class="nav-label">Actions</span> </a>
+        </li>
+
+		<li>
+			<a href="#"><i class="fa fa-file-invoice-dollar fa-fw"></i> <span class="nav-label">Billing</span><span class="fa arrow"></span></a>
+			<ul class="nav nav-second-level collapse in" aria-expanded="true">
+			  <li>
+				<a href="/app/#invoice-dashboard"><i class="fa fa-file-invoice fa-fw"></i> <span class="nav-label">Invoices</span> </a>
+			  </li>
+			</ul>
+		</li> 
+
+        <li>
+          <a href="#"><i class="fa fa-cogs fa-fw"></i> <span class="nav-label">Set up</span><span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level collapse in" aria-expanded="true">
+            <li>
+              <a href="/app/#setup-user-dashboard"><i class="fa fa-user fa-fw"></i> <span class="nav-label">Users</span> </a>
+            </li>
+            <li>
+              <a href="/app/#setup-user-role-dashboard"><i class="fa fa-id-card fa-fw"></i> <span class="nav-label">User Roles</span> </a>
+            </li>
+          </ul>
+        </li> 
+
+        <li>
+          <a href="/util-import/#util-import-dashboard"><i class="fa fa-cloud-upload fa-fw"></i> <span class="nav-label">Import</span> </a>
+        </li>
+
+      </ul>
+
+      <div class="nav-label alert alert-info m-sm mt-4">
+        <i class="fa fa-info-circle"></i> This webapp is based on the INSPINIA bootstrap template; to do more with it check out the <a href="https://wrapbootstrap.com/theme/inspinia-responsive-admin-theme-WB0R5L90S" target="_blank" style="color:#607d8b">full UI template & licensing</a> &
+        <a href="https://learn.mydigitalstructure.cloud" target="_blank" style="color:#607d8b">mydigitalstructure quick start guide</a>.
+      </div>
+    </div>
+  </nav>
+
+  <div id="page-wrapper" class="gray-bg">
+
+    <div class="row border-bottom">
+
+      <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header" >
+          <a class="navbar-minimalize minimalize-styl-2 btn btn-info" href="#"><i class="fa fa-bars"></i></a>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+          <li class="d-none" id="app-working"><img src="/site/1901/1901.working.gif" style="height:20px; margin-top:-12px; margin-right:8px;">
+          </li> 
+          <li class="dropdown myds-dropdown">
+            <a class="dropdown-toggle count-info" id="app-notification-actions" data-controller="app-notification-actions" data-toggle="dropdown" href="#">
+             <i class="fa fa-bell"></i> <span class="label label-primary" id="app-notification-actions-count">0</span>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts" style="width:500px;" id="app-notification-actions-view">      
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="myds-logoff">
+              <i class="fa fa-sign-out"></i> Log off
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row">
+        <div class="col-lg-12">               
+          <!--
+  
+  [Learn Comment /app #1]
+
+  The following HTML and associated CSS is used to create the form of the app, 
+  ie what the user sees and can interact with - also called the "view".
+
+  All the divs are hidden d-none by default and then based on user interactions
+  the mydigitalstructure JavaScript Framework shows them to the user by unhidding them.
+
+  Example;
+
+    When a user clicks on the Contacts menu option;
+
+    # the URL has the #contact-dashboard add to it,
+
+    # which results in the mydigitalstructure JavaScript Framework automatically unhidding the div id="contact-dashboard" (see below),
+
+    # and then invoking the "contact-dashboard" function, which uses JavaScript code
+      (stored in nnnn.app.contact-x.x.x.js) to add elements to the div
+      - eg showing a table of contacts by invoking the "util-view-table" function.
+
+  The CSS classes are primarly bootstrap (version 3) classes.
+
+  There is a quick start guide on HTML & CSS @
+  https://learn-next.mydigitalstructure.cloud/learn-quick-start-form
+
+  The {{ }} are field placeholders that the mydigitalstructure JavaScript Framework uses to set or get
+  data (stored on mydigitalstructure.cloud) into the user view automatically - eg {{firstname}} will show the firstname of the contact.
+
+  A list of valid fields for an object can be found @
+  https://learn-next.mydigitalstructure.cloud/schema
+
+-->
+
+<div id="dashboard" class="hidden d-none myds-view">
+  <div class="container-fluid">
+    <div class="container-fluid">
+      <div class="row p-y text-center">
+        <div class="col-sm-6 text-center" >
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="mt-1">Contacts</h2>
+            </div>
+            <div class="panel-body">
+              <div>
+                <a href="/app/#contact-dashboard">
+                  <h1 class="text-muted" style="font-size:3em;" id="dashboard-hello-contacts">...</h1>
+                </a>
+              </div>
+              <div class="text-center my-1">
+                <a href="/app/#contact-edit" data-controller="contact-edit" class="btn btn-primary btn-outline myds-click" id="app-dashboard-contacts-create"><i class="fa fa-plus"></i></a>  
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 text-center">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h2 class="mt-1">Actions</h2>
+            </div>
+            <div class="panel-body">
+              <div>
+                <a href="/app/#action-dashboard">
+                  <h1 class="text-muted" style="font-size:3em;" id="dashboard-hello-actions">...</h1>
+                </a>
+              </div>
+               <div class="text-center my-1">
+                <a href="/app/#action-edit" data-controller="action-edit" class="btn btn-primary btn-outline myds-click" id="app-dashboard-actions-create"><i class="fa fa-plus"></i></a>
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row py-3 text-center d-none">
+        <div class="col-sm-12 text-center">
+          <button 
+            class="btn btn-default"
+            data-toggle="popover"
+            title="Popover Header"
+            data-content="..."
+            data-controller="dashboard-popover"
+            data-placement="bottom",
+            data-html="true">Popover
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="contact-dashboard" class="hidden d-none myds-view">
+  <div class="container-fluid px-0">
+    <div class="row">
+      <div class="col-sm-12">
+        <form autocomplete="off">
+          <div class="input-group">
+            <input type="text" class="form-control myds-text" placeholder="Search for a contact" data-controller="contact-dashboard" data-context="search">
+            <div class="input-group-append">        
+              <button class="btn btn-white myds d-flex h-100" href="/app/#contact-edit" data-controller="contact-edit"><i class="fa fa-plus justify-content-center align-self-center"></i>
+              </button>
+
+              <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false"></button>
+
+              <ul class="dropdown-menu float-right" x-placement="bottom-start" style="position: absolute; top: 35px; left: 698px; will-change: top, left;">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+              </ul>
+
+            </div>
+          </div>
+        </form>  
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mt-2" id="contact-dashboard-view">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="contact-edit" class="hidden d-none myds-view">
+</div>
+
+<div id="_contact-edit" class="hidden d-none myds-view-template">
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-8 mt-1 mx-auto text-center">
+      <form autocomplete="off">
+        <div class="form-group">
+          <h4><label class="text-muted text-center mb-0 mt-1" for="contact-edit-firstname-{{id}}">First name</label></h4>
+          <input type="text" class="form-control input-lg myds-text text-center myds-validate" data-validate-maximum-length="50" id="contact-edit-firstname-{{id}}" value="{{firstname}}" data-value="{{firstname}}" data-id="{{id}}" data-scope="contact-edit-{{id}}" data-context="firstname">
+        </div>
+        <div class="form-group">
+          <h4><label class="text-muted text-center mb-0 mt-1" for="contact-edit-surname-{{id}}">Surname</label></h4>
+          <input type="text" class="form-control input-lg myds-text text-center myds-validate" data-validate-mandatory data-validate-maximum-length="50" id="contact-edit-surname-{{id}}" value="{{surname}}" data-value="{{surname}}" data-id="{{id}}" data-scope="contact-edit-{{id}}" data-context="surname">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2 mt-3">
+    <button class="btn btn-link myds-navigate" data-controller="contact-dashboard" id="contact-edit-cancel-{{id}}" data-id="{{id}}">Cancel</button>
+    <button class="btn btn-primary btn-outline myds-click" data-controller="contact-edit-save" id="contact-edit-save-{{id}}" data-id="{{id}}">Save</button>
+  </div>
+</div>
+
+<div id="action-dashboard" class="hidden d-none myds-view">
+  <div class="container-fluid px-0">
+    <div class="row">
+      <div class="col-sm-12">
+        <form autocomplete="off">
+          <div class="input-group">
+            <input type="text" class="form-control myds-text" placeholder="Search for an action" data-controller="action-dashboard" data-context="search">
+             <div class="input-group-append">        
+              <a class="btn btn-primary btn-outline myds d-flex h-100" data-controller="action-edit" href="/app/#action-edit"><i class="fa fa-plus justify-content-center align-self-center"></i></a>
+            </div>
+          </div>
+        </form>  
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mt-3" id="action-dashboard-view">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="action-edit" class="hidden d-none myds-view">
+</div>
+
+<div id="_action-edit" class="hidden d-none myds-view-template">
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-8 mt-2 mx-auto text-center">
+      <form autocomplete="off">
+        <div class="form-group">
+          <h4><label class="text-muted text-center mb-0 mt-1" for="action-edit-subject-{{id}}">Subject</label></h4>
+          <input type="text" class="form-control input-lg myds-text text-center" id="action-edit-subject-{{id}}" value="{{subject}}" data-value="{{subject}}" data-id="{{id}}" data-scope="action-edit-{{id}}" data-context="subject">
+        </div>
+        <div class="form-group">
+          <h4><label class="text-muted text-center mb-0 mt-1" for="contact-edit-date-{{id}}-view">Date</label></h4>
+          <div class="input-group date myds-date-time" data-target-input="nearest" id="action-edit-date-{{id}}-view">
+            <input type="text" class="form-control input-lg text-center datetimepicker-input" data-target="#action-edit-date-{{id}}-view" id="action-edit-date-{{id}}" data-id="{{id}}" data-scope="action-edit-{{id}}" data-context="date" value="{{date}}" data-value="{{date}}" />
+            <div class="input-group-append" data-target="#action-edit-date-{{id}}-view" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h4><label class="text-muted mb-0 mt-1" for="action-edit-type-{{id}}">Type</label></h4>
+          <select class="form-control input-lg myds-text-select text-center myds-validate" data-validate-mandatory style="width:100%;" id="action-edit-type-{{id}}" data-object="setup_action_type" data-scope="action-edit-{{id}}" data-context="actiontype" data-id="{{actiontype}}" data-text="{{actiontypetext}}">
+          </select>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2 mt-3">
+    <button class="btn btn-link myds-navigate" data-controller="action-dashboard" id="action-edit-cancel-{{id}}" data-id="{{id}}">Cancel</button>
+    <button class="btn btn-primary btn-outline myds-click" data-controller="action-edit-save" id="action-edit-save-{{id}}" data-id="{{id}}">Save</button>
+  </div>
+</div>
+
+<div id="invoice-dashboard" class="hidden d-none myds-view">
+	<div class="container-fluid px-0">
+	  <div class="row">
+		<div class="col-sm-12">
+		  <form autocomplete="off">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown" id="invoice-dashboard-filter" aria-expanded="false"><span class="dropdown-text">Not Paid</span>
+					</button>
+					<ul class="dropdown-menu mt-1"
+					  data-controller="invoice-dashboard"
+					  data-context="status"
+					>
+					  <li>
+						<a href="#" class="myds-dropdown" data-id="1" >
+						  Not Paid
+						</a>
+					  </li>
+					  <li>
+						<a href="#" class="myds-dropdown" data-id="-1">
+						  All
+						</a>
+					  </li>
+					</ul>
+				</div>
+			 	<input type="text" class="form-control myds-text" placeholder="Search for an invoice" data-controller="invoice-dashboard" data-context="search">
+			   	<div class="input-group-append d-none">        
+					<a class="btn btn-primary btn-outline myds d-flex h-100" data-controller="invoice-edit" href="/app/#invoice-edit"><i class="fa fa-plus justify-content-center align-self-center"></i></a>
+			  	</div>
+			</div>
+		  </form>  
+		</div>
+	  </div>
+	  <div class="container-fluid">
+		<div class="row mt-3" id="invoice-dashboard-view">
+		</div>
+	  </div>
+	</div>
+</div>
+   
+<div id="setup-dashboard" class="hidden d-none myds-view">
+  <h1>Setup</h1>
+</div>
+
+<div id="setup-user-dashboard" class="hidden d-none myds-view">
+  <div class="container-fluid px-0">
+    <div class="row">
+      <div class="col-sm-12">
+        <form autocomplete="off">
+          <input type="text" class="form-control myds-text" placeholder="Search for a user" data-controller="setup-user-dashboard" data-context="search">   
+        </form>  
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row mt-4" id="setup-user-dashboard-view">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="setup-user-edit" class="hidden d-none myds-view">
+</div>
+
+<div id="_setup-user-edit" class="hidden d-none myds-view-template">
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-10 mt-2 mx-auto text-center tabs-container">
+      <ul class="nav nav-tabs myds-tab">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#user-edit-details">Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " data-toggle="tab" href="#user-edit-roles" data-controller="setup-user-edit-roles">Roles</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="user-edit-details">
+          <div class="panel-body">
+            <form autocomplete="off">
+              <div class="form-group">
+                <h4><label class="text-muted text-center mb-0 mt-1" for="setup-user-edit-firstname-{{id}}">Username</label></h4>
+                <input type="text" class="form-control input-lg myds-text text-center" id="setup-user-edit-username-{{id}}" value="{{username}}" data-value="{{username}}" data-id="{{id}}" data-scope="setup-user-edit-{{id}}" data-context="username">
+              </div>
+            </form>
+
+            <div class="row justify-content-center my-4">
+              <button class="btn btn-link myds-navigate" data-controller="setup-user-dashboard" id="setup-user-edit-cancel-{{id}}" data-id="{{id}}">Cancel</button>
+              <button class="btn btn-primary btn-outline myds-click" data-controller="setup-user-edit-save" id="setup-user-edit-save-{{id}}" data-id="{{id}}">Save</button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="user-edit-roles">
+          <div class="panel-body" id="user-edit-roles-view">
+            ...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="float-right">
+        <a href="support@mydigitalstructure.com" target="_blank">support@mydigitalstructure.com</a>
+      </div>
+      <div>
+        <a href="https://learn.mydigitalstructure.cloud" target="_blank">Learn</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/site/1901/jquery-3.1.1.min.js"></script>
+<script src="/site/1901/popper.min.js"></script>
+<script src="/site/1901/bootstrap.min-4.5.0.js"></script>
+<script src="/site/1901/jquery.metisMenu.js"></script>
+<script src="/site/1901/jquery.slimscroll.min.js"></script>
+<script src="/site/1901/lodash.min.js"></script>
+<script src="/site/1901/underscore.string.min.js"></script>
+<script src="/site/1901/moment.min.js"></script>
+<script src="/site/1901/numeral.min.js"></script>
+<script src="/site/1901/he.js"></script>
+<script src="/site/1901/d3.min.js"></script>
+<script src="/site/1901/c3.min.js"></script>
+<script src="/site/1901/tempusdominus-bootstrap-4.min.js"></script>
+<script src="/site/1901/1901.popconfirm-1.0.0.js"></script>
+<script src="/site/1901/malsup.jquery.form.js"></script>
+
+<script src="/site/1901/pace.min.js"></script>
+<script src="/site/1901/jquery.sparkline.min.js"></script>
+<script src="/site/1901/jquery.gritter.min.js"></script>
+<script src="/site/1901/toastr.min.js"></script>
+
+<script src="/site/1901/select2.js"></script>
+<script src="/site/1901/xlsx.full.min.js"></script>
+
+<script src="/site/1901/1901.inspinia-1.0.0.js"></script>
+
+<script src="/site/1901/mydigitalstructure-3.6.4.js"></script>
+<script src="/site/1901/mydigitalstructure.util-4.1.5.js"></script>
+
+<script src="/site/1901/mydigitalstructure.util.calendar-1.0.0.js"></script>
+<script src="/site/1901/mydigitalstructure.util.chart-1.0.1.js"></script>
+<script src="/site/1901/mydigitalstructure.util.dashboard-1.0.8.js"></script>
+<script src="/site/1901/mydigitalstructure.util.export-1.1.5.js"></script>
+<script src="/site/1901/mydigitalstructure.util.financial-1.0.0.js"></script>
+<script src="/site/1901/mydigitalstructure.util.import-1.1.1.js"></script>
+<script src="/site/1901/mydigitalstructure.util.local-1.0.0.js"></script>
+<script src="/site/1901/mydigitalstructure.util.search-1.0.7.js"></script>
+<script src="/site/1901/mydigitalstructure.util.security-1.0.8.js"></script>
+
+
+<script src="/site/1901/1901.app-1.1.4.js"></script>
+<script src="/site/1901/1901.auth-1.0.1.js"></script>
+<script src="/site/1901/1901.app.dashboard-1.0.2.js"></script>
+<script src="/site/1901/1901.app.notifications-1.0.1.js"></script>
+<script src="/site/1901/1901.app.contact-1.0.1.js"></script>
+<script src="/site/1901/1901.app.action-1.0.2.js"></script>
+<script src="/site/1901/1901.app.billing-1.1.4.js"></script>
+<script src="/site/1901/1901.app.setup.user-1.0.1.js"></script>
+
+<script src="/site/1901/1901.util.import-1.0.0.js"></script>
+
+</body>
+</html>
