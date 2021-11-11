@@ -30,6 +30,7 @@ function main(err, data)
 			{
                 if (response == undefined)
                 {
+                    /*
                     var data =
                     {
                         criteria:
@@ -41,8 +42,8 @@ function main(err, data)
                             ]
                         }
                     }
+                    */
 
-                    /*
                     var data =
                     {
                         fields:
@@ -51,7 +52,6 @@ function main(err, data)
                             {name: 'surname'}
                         ]
                     }
-                    */
 
                     mydigitalstructure.send(
                     {
